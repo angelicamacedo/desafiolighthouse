@@ -1,0 +1,67 @@
+version: 2
+
+sources:
+  - name: dev_angelica
+    description: This is a copy of the Postgres database used by our customer.
+    tables:
+      - name: salesreason
+        description: >
+          This table contains information associated with the reason for sale
+        columns:
+          - name: salesreasonid
+            description: Primary key of sales reason table
+
+      - name: stateprovince
+        description: >
+          This table contains information about state province
+        columns:
+          - name: stateprovinceid
+            description: Primary key of sales reason table
+
+      - name: salesorderheadersalesreason
+        description: Make the relationship between salesorderheader and salesreason 
+        columns:
+          - name: salesreasonid
+            description: Primary key of sales reason order header sales reason table 
+              
+      - name: salesorderheader
+        description: General sales order information
+        columns:
+          - name: salesorderid
+            description: Customer purchase order number reference
+
+      - name: salesorderdetail
+        description: Individual products associated with a specific sales order
+        columns:
+          - name: salesorderdetailid
+            description: Primary key of sales order detail table
+
+      - name: product
+        description: Products sold or used in the manfacturing of sold products.
+        columns:
+          - name: productid
+            description: Primary Key for products records
+
+      - name: person
+        description: Human beings involved with AdventureWorks employees, customer contacts, and vendor contacts.
+
+      - name: customer
+        description: Current customer information
+        columns:
+          - name: customerid
+            description: Primary key for customers records
+
+      - name: creditcard
+        description: Customer credit card information
+        columns:
+          - name: creditcardid
+            description: Primary key for Credit Card records
+
+      - name: countryregion
+        description: Table with countries and their codes
+
+      - name: address
+        description: Table with address infomartion     
+
+      - name: businessentitycontact
+        description: Table with business entity contact infomartion         
