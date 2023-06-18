@@ -41,6 +41,12 @@ sources:
         columns:
           - name: productid
             description: Primary Key for products records
+      
+      - name: productcategory
+        description: High-level product categorization
+
+      - name: productsubcategory
+        description: High-level product categorization
 
       - name: person
         description: Human beings involved with AdventureWorks employees, customer contacts, and vendor contacts.

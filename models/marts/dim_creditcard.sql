@@ -10,4 +10,11 @@ with
             {{ ref('stg_creditcard') }}
     )
 
-select * from credit_card
+    , transformed_creditcard as (
+        select
+            {{ dbt_utils.generate_surrogate_key(['creditcard_id']) }} as creditcard_sk
+            , *
+        from credit_card
+    )
+
+select * from transformed_creditcard 
