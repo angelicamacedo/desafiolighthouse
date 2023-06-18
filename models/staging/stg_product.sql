@@ -1,9 +1,9 @@
 with source as (
     select
-        productid
+        productid as product_id
         , name as product_name
-        , productnumber
-    from {{source('dev_angelica','product')}}
+        , productnumber as product_number
+    from {{ source('dev_angelica','product') }}
 )
 
 select * from source

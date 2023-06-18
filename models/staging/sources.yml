@@ -61,7 +61,7 @@ sources:
         description: Table with countries and their codes
 
       - name: address
-        description: Table with address infomartion     
+        description: Street address information for customers, employees, and vendors     
 
       - name: businessentitycontact
         description: Table with business entity contact infomartion         
