@@ -1,12 +1,11 @@
 with source as (
     select
-        creditcardid
-        , cardtype 
+        creditcardid as creditcard_id
+        , cardtype as card_type
         , cardnumber
         , expmonth
         , expyear
-        , modifieddate
-    from {{source('dev_angelica','creditcard')}}
+    from {{ source('dev_angelica','creditcard') }}
 )
 
 select * from source
