@@ -7,6 +7,7 @@ with source as (
         , shiptoaddressid as shiptoaddress_id
         , territoryid as territory_id
         , shipmethodid as shipmethod_id
+        , customerid as customer_id
         , onlineorderflag as onlineorder_flag
         , cast (orderdate as timestamp) order_date
         , cast(duedate as timestamp) as due_date
