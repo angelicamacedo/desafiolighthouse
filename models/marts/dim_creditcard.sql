@@ -11,7 +11,7 @@ with stg_salesorderheader as (
         {{ ref('stg_creditcard') }}
 )
 
-, transformed_creditcard as (
+, transformed as (
     select
         {{ dbt_utils.generate_surrogate_key(
             ['stg_salesorderheader.creditcardid']
@@ -23,4 +23,4 @@ with stg_salesorderheader as (
 )
 
 select * 
-from transformed_creditcard 
+from transformed

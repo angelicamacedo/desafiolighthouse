@@ -50,7 +50,7 @@ with customers as (
         salesorderid
         , customers.customer_sk as customer_fk
         , creditcard.creditcard_sk as creditcard_fk
-        , location.shiptoaddress_sk as shiptoadress_fk
+        , location.shiptoaddress_sk as shiptoaddress_fk
         -- Description added to order_status based on data dictionary of Adventure Works  
         , case
             when order_status = 1 then 'In process'
@@ -74,7 +74,7 @@ with customers as (
         salesorderdetail.salesorderid
         , salesorderdetail.product_fk
         , salesorderheader.customer_fk
-        , salesorderheader.shiptoadress_fk
+        , salesorderheader.shiptoaddress_fk
         , salesorderheader.creditcard_fk
         , salesorderdetail.unitprice
         , salesorderdetail.orderqty

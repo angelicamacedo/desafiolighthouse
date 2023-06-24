@@ -31,8 +31,8 @@ select
         ) }} as customer_sk
         , stg_customer.customerid
         , stg_person.businessentityid
-        , stg_person.fullname
         , stg_store.storebusinessentityid
+        , stg_person.fullname
         , stg_store.store_name
     from stg_customer
     left join stg_person on stg_customer.personid = stg_person.businessentityid
