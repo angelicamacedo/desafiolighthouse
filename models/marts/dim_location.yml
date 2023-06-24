@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: dim_location
+    columns:
+      - name: shiptoaddress_sk
+        description: The primary key of the location table
+        tests:
+          - unique
+          - not_null

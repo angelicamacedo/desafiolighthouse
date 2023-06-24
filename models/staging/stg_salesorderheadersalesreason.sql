@@ -1,7 +1,7 @@
 with source as (
     select
-        salesorderid as salesorder_id
-        , salesreasonid as salesreason_id 
+        salesorderid
+        , salesreasonid
     from {{ source('dev_angelica','salesorderheadersalesreason') }}
 )
 

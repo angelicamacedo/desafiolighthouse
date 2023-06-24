@@ -1,7 +1,7 @@
 with source as (
     select
-        productsubcategoryid as productsubcategory_id
-        , productcategoryid as productcategory_id
+        productsubcategoryid
+        , productcategoryid
         , name as productsubcategory_name
     from {{ source('dev_angelica','productsubcategory') }}
 )
