@@ -1,7 +1,7 @@
 with source as (
     select
-        creditcardid as creditcard_id
-        , cardtype as card_type
+        creditcardid
+        , cardtype
         , cardnumber
         , expmonth
         , expyear

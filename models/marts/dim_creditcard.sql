@@ -1,20 +1,26 @@
-with credit_card as (
-    select
-        creditcard_id
-        , card_type
-        , cardnumber
-        , expmonth
-        , expyear
+with stg_salesorderheader as (
+    select 
+        distinct(creditcardid)
+    from {{ ref('stg_salesorderheader') }}
+    where creditcardid is not null
+)
+
+, stg_creditcard as (
+    select *
     from 
         {{ ref('stg_creditcard') }}
-    )
+)
 
-    , transformed_creditcard as (
+, transformed_creditcard as (
     select
-        {{ dbt_utils.generate_surrogate_key(['creditcard_id']) }} as creditcard_sk
-        , *
-    from credit_card
-    )
+        {{ dbt_utils.generate_surrogate_key(
+            ['stg_salesorderheader.creditcardid']
+            ) }} as creditcard_sk
+        , stg_salesorderheader.creditcardid
+        , stg_creditcard.cardtype
+    from stg_salesorderheader 
+    left join stg_creditcard on stg_salesorderheader.creditcardid = stg_creditcard.creditcardid
+)
 
 select * 
 from transformed_creditcard 

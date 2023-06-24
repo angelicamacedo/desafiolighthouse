@@ -1,8 +1,8 @@
 with source as (
     select
-         salesreasonid as salesreason_id
-         , name as sales_reason
-         , reasontype as sales_type
+         salesreasonid
+         , name as reason_name
+         , reasontype
     from {{ source('dev_angelica','salesreason') }}
 )
 

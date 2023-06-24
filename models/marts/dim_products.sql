@@ -1,44 +1,41 @@
-with products as (
-    select
-        product_id
-        , productsubcategory_id
-        , product_name
-        , product_number
-from {{ ref('stg_product') }} as products
+with stg_salesorderheader as (
+    select *
+    from {{ref('stg_salesorderheader')}}
 )
 
-, productcategory as (
-    select
-        productcategory_id
-        , productcategory_name
-    from {{ ref('stg_productcategory') }} as productcategory
+, stg_salesorderdetail as (
+    select 
+        distinct(productid)
+    from {{ref('stg_salesorderdetail')}}
 )
 
-, productsubcategory as (
-    select
-        productsubcategory_id
-        , productcategory_id
-        , productsubcategory_name
-    from {{ ref('stg_productsubcategory') }} as productsubcategory
+, stg_product as (
+    select *
+from {{ ref('stg_product') }}
 )
 
-, transformed_products as (
-    select
-    {{ dbt_utils.generate_surrogate_key (['product_id']) }} as product_sk
-    , products.product_id
-    , productsubcategory.productsubcategory_id
-    , productcategory.productcategory_id
-    , products.product_name
-    , productcategory.productcategory_name
-    , productsubcategory.productsubcategory_name
-    , products.product_number
-from
-    products
-inner join productsubcategory 
-    on productsubcategory.productsubcategory_id = products.productsubcategory_id
-inner join productcategory
-    on productcategory.productcategory_id = productsubcategory.productcategory_id 
+, stg_productcategory as (
+    select *
+    from {{ ref('stg_productcategory') }}
 )
-    
-select * 
-from transformed_products
+
+, stg_productsubcategory as (
+    select *
+    from {{ ref('stg_productsubcategory') }}
+)
+
+, transformed as (
+    select
+    {{ dbt_utils.generate_surrogate_key (['stg_salesorderdetail.productid']) }} as product_sk
+        , stg_salesorderdetail.productid
+        , stg_product.product_name 
+        , stg_productcategory.productcategory_name
+        , stg_productsubcategory.productsubcategory_name
+from stg_salesorderdetail
+left join stg_product on stg_salesorderdetail.productid = stg_product.productid
+left join stg_productsubcategory on stg_product.productsubcategoryid = stg_productsubcategory.productsubcategoryid
+left join stg_productcategory on stg_productcategory.productcategoryid = stg_productsubcategory.productcategoryid 
+)
+
+select *
+from transformed

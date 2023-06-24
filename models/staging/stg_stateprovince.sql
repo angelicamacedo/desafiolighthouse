@@ -1,10 +1,10 @@
 with source as (
     select
-         stateprovinceid as stateprovince_id
+         stateprovinceid
+         , countryregioncode
          , territoryid as territory_id
-         , stateprovincecode as stateprovince_code
-         , countryregioncode as countryregion_code
-         , name as stateprovince_name
+         , stateprovincecode
+         , name as state_name
     from {{ source('dev_angelica','stateprovince') }}
 )
 

@@ -1,7 +1,7 @@
 with source as (
     select
-        addressid as address_id
-        , stateprovinceid as stateprovince_id
+        addressid
+        , stateprovinceid
         , addressline1
         , addressline2
         , city
