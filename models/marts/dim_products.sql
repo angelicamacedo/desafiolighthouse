@@ -1,12 +1,7 @@
-with stg_salesorderheader as (
-    select *
-    from {{ref('stg_salesorderheader')}}
-)
-
-, stg_salesorderdetail as (
+with stg_salesorderdetail as (
     select 
         distinct(productid)
-    from {{ref('stg_salesorderdetail')}}
+    from {{ ref('stg_salesorderdetail') }}
 )
 
 , stg_product as (
@@ -33,8 +28,10 @@ from {{ ref('stg_product') }}
         , stg_productsubcategory.productsubcategory_name
 from stg_salesorderdetail
 left join stg_product on stg_salesorderdetail.productid = stg_product.productid
-left join stg_productsubcategory on stg_product.productsubcategoryid = stg_productsubcategory.productsubcategoryid
-left join stg_productcategory on stg_productcategory.productcategoryid = stg_productsubcategory.productcategoryid 
+left join stg_productsubcategory 
+    on stg_product.productsubcategoryid = stg_productsubcategory.productsubcategoryid
+left join stg_productcategory 
+    on stg_productcategory.productcategoryid = stg_productsubcategory.productcategoryid 
 )
 
 select *

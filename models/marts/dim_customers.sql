@@ -10,7 +10,8 @@ with stg_customer as (
 , stg_person as (
 select
     businessentityid
-    , concat(ifnull(firstname,' '),' ',ifnull(middlename,' '),' ',ifnull(lastname,' ')) as fullname
+    , concat(ifnull(firstname,' '),' ',ifnull(middlename,' '),' ',ifnull(lastname,' ')
+    ) as fullname
     from 
         {{ ref('stg_person') }}
 )

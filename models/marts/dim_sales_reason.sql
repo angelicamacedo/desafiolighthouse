@@ -5,7 +5,7 @@ with stg_salesorderheadersalesreason as (
 
 , stg_salesreason as (
     select *
-    from {{ref('stg_salesreason')}}
+    from {{ ref('stg_salesreason') }}
 )
 
 , reasonbyorderid as (
@@ -13,7 +13,8 @@ with stg_salesorderheadersalesreason as (
         stg_salesorderheadersalesreason.salesorderid
         , stg_salesreason.reason_name
     from stg_salesorderheadersalesreason
-    left join stg_salesreason on stg_salesorderheadersalesreason.salesreasonid = stg_salesreason.salesreasonid 
+    left join stg_salesreason 
+        on stg_salesorderheadersalesreason.salesreasonid = stg_salesreason.salesreasonid 
 )
 
 , transformed as (

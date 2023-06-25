@@ -8,4 +8,5 @@ with source as (
     from {{ source('dev_angelica','stateprovince') }}
 )
 
-select * from source
+select *
+from source

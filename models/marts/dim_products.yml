@@ -4,7 +4,7 @@ models:
   - name: dim_products
     columns:
       - name: product_sk
-        description: The primary key of the products table
+        description: The primary key of the products table.
         tests:
           - unique
           - not_null

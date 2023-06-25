@@ -6,4 +6,5 @@ with source as (
     from {{ source('dev_angelica','store') }}
 )
 
-select * from source
+select * 
+from source

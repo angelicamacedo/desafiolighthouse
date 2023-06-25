@@ -12,4 +12,5 @@ with source as (
     from {{ source('dev_angelica','person') }}
 )
 
-select * from source
+select *
+from source

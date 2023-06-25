@@ -4,22 +4,22 @@ models:
   - name: fct_order_details
     columns:
       - name: salesorderid
-        description: The primary key of the sale
+        description: The primary key of the sales
         tests:
           - not_null
       
       - name: product_fk
-        description: The foreign key of the product
+        description: The foreign key of the product table
         tests:
           - not_null
 
       - name: customer_fk
-        description: The foreign key of the customer
+        description: The foreign key of the customer table
         tests:
           - not_null    
       
       - name: shiptoaddress_fk
-        description: The foreign key of the shiptoadress
+        description: The foreign key of the location table lui
         tests:
           - not_null       
       
@@ -37,7 +37,7 @@ models:
         tests:
           - not_null
 
-      - name: revenue_wo_taxandfreight
+      - name: revenue_wo_taxfreight
         description: The revenue obtained by multiplying unitprice and orderqty 
 
       - name: orderdate
@@ -46,6 +46,6 @@ models:
           - not_null 
 
       - name: order_status_name
-        description: The order's status. Considered as a degenerated dimension. No dimension table created for it.
+        description: The order's status. Considered as a degenerated dimension.No dimension table created for it.
         tests:
           - not_null  

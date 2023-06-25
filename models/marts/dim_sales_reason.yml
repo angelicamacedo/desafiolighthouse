@@ -4,7 +4,7 @@ models:
   - name: dim_sales_reason
     columns:
       - name: salesorderid
-        description: The primary key of the clients table
+        description: The primary key of the sales reason table.
         tests:
           - unique
           - not_null

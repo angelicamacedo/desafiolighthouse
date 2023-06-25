@@ -40,8 +40,8 @@ with customers as (
         , stg_salesorderdetail.productid
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
-        , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty  AS  revenue_wo_taxandfreight
-    from {{ref('stg_salesorderdetail')}} stg_salesorderdetail
+        , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty AS revenue_wo_taxfreight
+    from {{ ref('stg_salesorderdetail') }} stg_salesorderdetail
     left join products on stg_salesorderdetail.productid = products.productid
 )
 
@@ -59,7 +59,7 @@ with customers as (
             when order_status = 4 then 'Rejected' 
             when order_status = 5 then 'Shipped'
             when order_status = 6 then 'Cancelled' 
-            ELSE 'no_status'
+            else 'no_status'
         end as order_status_name
         , orderdate
     from {{ref('stg_salesorderheader')}} 
@@ -78,11 +78,12 @@ with customers as (
         , salesorderheader.creditcard_fk
         , salesorderdetail.unitprice
         , salesorderdetail.orderqty
-        , salesorderdetail.revenue_wo_taxandfreight
+        , salesorderdetail.revenue_wo_taxfreight
         , salesorderheader.orderdate
         , salesorderheader.order_status_name
     from salesorderdetail
-    left join salesorderheader on salesorderdetail.salesorderid = salesorderheader.salesorderid
+    left join salesorderheader 
+        on salesorderdetail.salesorderid = salesorderheader.salesorderid
 )
 
 select *
