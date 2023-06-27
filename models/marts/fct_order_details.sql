@@ -40,7 +40,7 @@ with customers as (
         , stg_salesorderdetail.productid
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
-        , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty AS revenue_wo_taxfreight
+        , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty as revenue_wo_taxfreight
     from {{ ref('stg_salesorderdetail') }} stg_salesorderdetail
     left join products on stg_salesorderdetail.productid = products.productid
 )
