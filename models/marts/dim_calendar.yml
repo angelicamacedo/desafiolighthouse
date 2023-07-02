@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: dim_calendar
+    columns:
+      - name: metric_date
+        description: "Metric date"
+        tests:
+          - not_null
+

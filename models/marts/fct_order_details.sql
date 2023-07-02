@@ -40,6 +40,7 @@ with customers as (
         , stg_salesorderdetail.productid
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
+        , stg_salesorderdetail.unitpricediscount
         , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty as revenue_wo_taxfreight
     from {{ ref('stg_salesorderdetail') }} stg_salesorderdetail
     left join products on stg_salesorderdetail.productid = products.productid
@@ -61,7 +62,7 @@ with customers as (
             when order_status = 6 then 'Cancelled' 
             else 'no_status'
         end as order_status_name
-        , orderdate
+        , cast (orderdate as date) orderdate
     from {{ref('stg_salesorderheader')}} 
     left join customers on stg_salesorderheader.customerid = customers.customerid
     left join creditcard on stg_salesorderheader.creditcardid = creditcard.creditcardid
@@ -71,13 +72,15 @@ with customers as (
 /* We then join salesorderdetail and salesorderheader to get the final fact table*/
 , final as (
     select
-        salesorderdetail.salesorderid
+        {{ dbt_utils.generate_surrogate_key (['salesorderdetail.salesorderid']) }} as factorder_sk
+        , salesorderdetail.salesorderid as salesorder_id
         , salesorderdetail.product_fk
         , salesorderheader.customer_fk
         , salesorderheader.shiptoaddress_fk
         , salesorderheader.creditcard_fk
         , salesorderdetail.unitprice
         , salesorderdetail.orderqty
+        , salesorderdetail.unitpricediscount
         , salesorderdetail.revenue_wo_taxfreight
         , salesorderheader.orderdate
         , salesorderheader.order_status_name

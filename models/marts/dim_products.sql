@@ -22,10 +22,10 @@ from {{ ref('stg_product') }}
 , transformed as (
     select
     {{ dbt_utils.generate_surrogate_key (['stg_salesorderdetail.productid']) }} as product_sk
-        , stg_salesorderdetail.productid
-        , stg_product.product_name 
-        , stg_productcategory.productcategory_name
-        , stg_productsubcategory.productsubcategory_name
+    , stg_salesorderdetail.productid
+    , stg_product.product_name 
+    , stg_productcategory.productcategory_name
+    , stg_productsubcategory.productsubcategory_name
 from stg_salesorderdetail
 left join stg_product on stg_salesorderdetail.productid = stg_product.productid
 left join stg_productsubcategory 

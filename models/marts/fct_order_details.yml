@@ -3,7 +3,12 @@ version: 2
 models:
   - name: fct_order_details
     columns:
-      - name: salesorderid
+      - name: factorder_sk
+        description: "Surrogate key generated for fact table"
+        tests:
+          - not_null
+
+      - name: salesorder_id
         description: The primary key of the sales
         tests:
           - not_null
@@ -11,21 +16,30 @@ models:
       - name: product_fk
         description: The foreign key of the product table
         tests:
-          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk
 
       - name: customer_fk
         description: The foreign key of the customer table
         tests:
-          - not_null    
-      
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
+  
       - name: shiptoaddress_fk
         description: The foreign key of the location table lui
         tests:
-          - not_null       
+          - relationships:
+              to: ref('dim_location')
+              field: shiptoaddress_sk     
       
       - name: creditcard_fk
-        description: The credit card foreign key. If there is no credit card,
-         it is assumed that the purchase was made using another payment method.
+        description: The credit card foreign key. If there is no credit card, it is assumed that the purchase was made using another payment method.
+        tests:
+          - relationships:
+              to: ref('dim_creditcard')
+              field: creditcard_sk
 
       - name: unitprice
         description: The unit price of the product 
@@ -34,6 +48,11 @@ models:
 
       - name: orderqty
         description: The quantity of the order
+        tests:
+          - not_null
+
+      - name: unitpricediscount
+        description: Discount amount
         tests:
           - not_null
 

@@ -79,5 +79,3 @@ sources:
           - name: stateprovinceid
             description: Primary key of sales reason table.
 
-      - name: store
-        description: Customers (resellers) of Adventure Works products.
