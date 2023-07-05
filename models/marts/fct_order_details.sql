@@ -36,13 +36,14 @@ with customers as (
 , salesorderdetail as (
     select
         stg_salesorderdetail.salesorderid
+        , stg_salesorderdetail.salesorderdetailid
         , products.product_sk as product_fk
         , stg_salesorderdetail.productid
         , stg_salesorderdetail.orderqty
         , stg_salesorderdetail.unitprice
         , stg_salesorderdetail.unitpricediscount
         , stg_salesorderdetail.unitprice * stg_salesorderdetail.orderqty as revenue_wo_taxfreight
-    from {{ ref('stg_salesorderdetail') }} stg_salesorderdetail
+    from {{ ref('stg_salesorderdetail') }}
     left join products on stg_salesorderdetail.productid = products.productid
 )
 
@@ -72,7 +73,11 @@ with customers as (
 /* We then join salesorderdetail and salesorderheader to get the final fact table*/
 , final as (
     select
-        {{ dbt_utils.generate_surrogate_key (['salesorderdetail.salesorderid']) }} as factorder_sk
+        {{ dbt_utils.generate_surrogate_key (
+            ['salesorderdetail.salesorderid'
+            , 'salesorderdetail.salesorderdetailid'
+            ]
+        ) }} as factorder_sk
         , salesorderdetail.salesorderid as salesorder_id
         , salesorderdetail.product_fk
         , salesorderheader.customer_fk

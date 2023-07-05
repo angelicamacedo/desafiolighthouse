@@ -14,6 +14,7 @@ with
         from 
             {{ref('fct_order_details')}}
     )
+    
     , final as (
         select
             case

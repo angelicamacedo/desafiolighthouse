@@ -7,15 +7,17 @@ models:
         description: "Surrogate key generated for fact table"
         tests:
           - not_null
+          - unique
 
       - name: salesorder_id
         description: The primary key of the sales
         tests:
           - not_null
-      
+
       - name: product_fk
         description: The foreign key of the product table
         tests:
+          - not_null
           - relationships:
               to: ref('dim_products')
               field: product_sk
@@ -23,6 +25,7 @@ models:
       - name: customer_fk
         description: The foreign key of the customer table
         tests:
+          - not_null
           - relationships:
               to: ref('dim_customers')
               field: customer_sk
@@ -30,6 +33,7 @@ models:
       - name: shiptoaddress_fk
         description: The foreign key of the location table lui
         tests:
+          - not_null
           - relationships:
               to: ref('dim_location')
               field: shiptoaddress_sk     
