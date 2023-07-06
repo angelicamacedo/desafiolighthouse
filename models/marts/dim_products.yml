@@ -20,4 +20,4 @@ models:
 
       - name: productsubcategory_name 
         description: Name of the product subcategory
-
+        
