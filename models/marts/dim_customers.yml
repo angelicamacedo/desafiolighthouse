@@ -8,3 +8,15 @@ models:
         tests:
           - unique
           - not_null
+
+      - name: customerid
+        description: Id of customer.
+
+      - name: businessentityid
+        description: Id of person        
+
+      - name: firstname
+        description: First name of the customer.   
+
+      - name: fullname
+        description: Full name of the customer.  

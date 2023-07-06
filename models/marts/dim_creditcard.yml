@@ -8,3 +8,9 @@ models:
         tests:
           - unique
           - not_null
+
+      - name: creditcardid
+        description: Id of credit card.
+
+      - name: cardtype
+        description: Credit card name.       

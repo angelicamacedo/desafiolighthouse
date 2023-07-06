@@ -8,3 +8,15 @@ models:
         tests:
           - unique
           - not_null
+
+      - name: shiptoaddressid
+        description: Id of address
+
+      - name: city_name
+        description: Name of the city
+
+      - name: state_name
+        description: Name of the province
+
+      - name: country_name
+        description: Name of the country

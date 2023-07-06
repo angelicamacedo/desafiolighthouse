@@ -8,3 +8,16 @@ models:
         tests:
           - unique
           - not_null
+
+      - name: productid
+        description: Id of product
+
+      - name: product_name 
+        description: Name of the product
+
+      - name: productcategory_name 
+        description: Name of the product category
+
+      - name: productsubcategory_name 
+        description: Name of the product subcategory
+
